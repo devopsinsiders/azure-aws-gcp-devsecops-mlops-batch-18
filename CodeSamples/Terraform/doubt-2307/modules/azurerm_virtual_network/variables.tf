@@ -1,0 +1,1 @@
+variable "virtual_networks" {}

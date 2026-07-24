@@ -1,0 +1,1 @@
+variable "public_ips" {}
