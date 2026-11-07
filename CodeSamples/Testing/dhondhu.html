@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>✨ Shubh Deepawali | Happy Diwali ✨</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      background: radial-gradient(circle at 50% 20%, #2b0b3f 0%, #150524 50%, #080112 100%);
+      color: #fff;
+      font-family: 'Poppins', sans-serif;
+      overflow-x: hidden;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    canvas#fireworks {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Hanging Lamps / Toran decoration */
+    .garland {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      z-index: 3;
+      pointer-events: none;
+    }
+
+    .lantern {
+      width: 24px;
+      height: 40px;
+      background: linear-gradient(to bottom, #ffd700, #ff8c00);
+      border-radius: 8px 8px 14px 14px;
+      box-shadow: 0 0 15px #ffb300, 0 0 35px #ff6f00;
+      position: relative;
+      animation: swing 3s ease-in-out infinite alternate;
+      transform-origin: top center;
+    }
+
+    .lantern::before {
+      content: '';
+      position: absolute;
+      top: -16px;
+      left: 50%;
+      width: 2px;
+      height: 16px;
+      background: #e6b800;
+      transform: translateX(-50%);
+    }
+
+    .lantern:nth-child(2n) {
+      animation-duration: 2.6s;
+      animation-delay: 0.4s;
+    }
+
+    .lantern:nth-child(3n) {
+      animation-duration: 3.4s;
+      animation-delay: 0.8s;
+    }
+
+    @keyframes swing {
+      0% { transform: rotate(-8deg); }
+      100% { transform: rotate(8deg); }
+    }
+
+    /* Greeting Card Container */
+    .greeting-card {
+      position: relative;
+      z-index: 2;
+      max-width: 680px;
+      width: 100%;
+      background: rgba(30, 9, 44, 0.78);
+      backdrop-filter: blur(12px);
+      border: 2px solid rgba(255, 215, 0, 0.4);
+      border-radius: 28px;
+      padding: 45px 35px 40px;
+      text-align: center;
+      box-shadow: 0 0 50px rgba(255, 170, 0, 0.25), inset 0 0 30px rgba(255, 215, 0, 0.08);
+      margin: 40px 0;
+    }
+
+    /* Traditional Decorative Rangoli Ring */
+    .rangoli-decor {
+      width: 90px;
+      height: 90px;
+      margin: 0 auto 12px;
+      animation: rotateRangoli 25s linear infinite;
+    }
+
+    @keyframes rotateRangoli {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .sub-title {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.6rem;
+      color: #ffd966;
+      text-shadow: 0 0 12px rgba(255, 217, 102, 0.6);
+      margin-bottom: 5px;
+    }
+
+    .main-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(2.2rem, 6vw, 3.4rem);
+      font-weight: 900;
+      background: linear-gradient(45deg, #ffe066, #ffb300, #ff6b35, #ffd966);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 20px;
+      text-shadow: 0 0 25px rgba(255, 179, 0, 0.5);
+    }
+
+    /* Animated Diya */
+    .diya-container {
+      position: relative;
+      width: 120px;
+      height: 90px;
+      margin: 10px auto 25px;
+    }
+
+    .diya-base {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 110px;
+      height: 45px;
+      background: radial-gradient(circle at 50% 20%, #d87c2b, #842f06 75%, #421200);
+      border-radius: 0 0 60px 60px;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.5), inset 0 4px 10px #ffaa5a;
+      border: 1px solid #ffcc80;
+    }
+
+    .diya-rim {
+      position: absolute;
+      top: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 116px;
+      height: 16px;
+      background: linear-gradient(90deg, #b35900, #ffb347, #b35900);
+      border-radius: 50%;
+    }
+
+    .flame {
+      position: absolute;
+      top: 2px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 22px;
+      height: 42px;
+      background: linear-gradient(to top, #ff3300 0%, #ff9900 40%, #ffff66 80%, #ffffff 100%);
+      border-radius: 50% 50% 35% 35% / 60% 60% 40% 40%;
+      box-shadow: 0 0 20px #ffaa00, 0 0 40px #ff6600, 0 0 65px #ff3300;
+      animation: flicker 0.15s infinite alternate ease-in-out;
+      transform-origin: bottom center;
+    }
+
+    @keyframes flicker {
+      0% {
+        transform: translateX(-50%) rotate(-2deg) scale(0.97, 1.02);
+        opacity: 0.95;
+      }
+      100% {
+        transform: translateX(-50%) rotate(2deg) scale(1.03, 0.97);
+        opacity: 1;
+      }
+    }
+
+    .message {
+      font-size: 1.08rem;
+      line-height: 1.8;
+      color: #f1dfc7;
+      margin: 15px auto 28px;
+      max-width: 540px;
+      font-weight: 300;
+    }
+
+    .wishes-highlight {
+      color: #ffe680;
+      font-weight: 600;
+    }
+
+    /* Buttons / Interactions */
+    .button-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .festive-btn {
+      background: linear-gradient(135deg, #ff8c00, #d62828);
+      color: #fff;
+      border: 1px solid #ffd700;
+      padding: 12px 24px;
+      border-radius: 50px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(230, 81, 0, 0.4);
+    }
+
+    .festive-btn:hover {
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 6px 25px rgba(255, 152, 0, 0.7);
+      background: linear-gradient(135deg, #ffa000, #e63946);
+    }
+
+    .festive-btn-gold {
+      background: linear-gradient(135deg, #d4af37, #aa771c);
+      box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+    }
+
+    .festive-btn-gold:hover {
+      background: linear-gradient(135deg, #ffd700, #c58d24);
+      box-shadow: 0 6px 25px rgba(255, 215, 0, 0.7);
+    }
+
+    /* Personalize section */
+    .customize-box {
+      margin-top: 25px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 215, 0, 0.2);
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .name-input {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 215, 0, 0.4);
+      border-radius: 25px;
+      padding: 10px 18px;
+      color: #fff;
+      font-size: 0.95rem;
+      outline: none;
+      width: 230px;
+    }
+
+    .name-input::placeholder {
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .name-input:focus {
+      border-color: #ffd700;
+      box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    }
+
+    .blessing-footer {
+      margin-top: 25px;
+      font-size: 0.9rem;
+      color: #d1b48c;
+      letter-spacing: 1px;
+    }
+
+    /* Diyas Row at the bottom */
+    .bottom-diyas {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-top: 15px;
+      z-index: 2;
+    }
+
+    .mini-diya {
+      font-size: 2rem;
+      filter: drop-shadow(0 0 10px #ff9800);
+      cursor: pointer;
+      transition: transform 0.2s ease;
+      user-select: none;
+    }
+
+    .mini-diya:hover {
+      transform: scale(1.3) rotate(5deg);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hanging Decorative Lanterns -->
+  <div class="garland">
+    <div class="lantern"></div>
+    <div class="lantern"></div>
+    <div class="lantern"></div>
+    <div class="lantern"></div>
+    <div class="lantern"></div>
+    <div class="lantern"></div>
+    <div class="lantern"></div>
+  </div>
+
+  <!-- Background Fireworks Canvas -->
+  <canvas id="fireworks"></canvas>
+
+  <!-- Main Diwali Card -->
+  <div class="greeting-card">
+    
+    <!-- Rangoli SVG Mandala -->
+    <svg class="rangoli-decor" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="50" cy="50" r="45" stroke="#ffd700" stroke-width="1.5" stroke-dasharray="3 3"/>
+      <circle cx="50" cy="50" r="32" stroke="#ff9900" stroke-width="1.5"/>
+      <circle cx="50" cy="50" r="18" fill="rgba(255, 215, 0, 0.15)" stroke="#ffe066" stroke-width="1.2"/>
+      <path d="M50 5 L55 35 L50 40 L45 35 Z" fill="#ffb703"/>
+      <path d="M50 95 L55 65 L50 60 L45 65 Z" fill="#ffb703"/>
+      <path d="M5 50 L35 55 L40 50 L35 45 Z" fill="#ffb703"/>
+      <path d="M95 50 L65 55 L60 50 L65 45 Z" fill="#ffb703"/>
+      <circle cx="50" cy="50" r="6" fill="#ffd700"/>
+    </svg>
+
+    <div class="sub-title">Shubh Deepawali</div>
+    <h1 class="main-title">Happy Diwali</h1>
+
+    <!-- Glowing 3D Diya -->
+    <div class="diya-container">
+      <div class="flame"></div>
+      <div class="diya-rim"></div>
+      <div class="diya-base"></div>
+    </div>
+
+    <!-- Festive Message -->
+    <p class="message" id="diwali-quote">
+      May the divine glow of thousands of diyas illuminate your life with endless 
+      <span class="wishes-highlight">joy, prosperity, health, and success</span>. 
+      Wishing you and your beloved family a sparkling and blessed Diwali!
+    </p>
+
+    <!-- Interactive Buttons -->
+    <div class="button-group">
+      <button class="festive-btn" onclick="launchCelebration()">
+        <span>🎆</span> Burst Crackers
+      </button>
+      <button class="festive-btn festive-btn-gold" onclick="nextWish()">
+        <span>✨</span> Next Blessing
+      </button>
+    </div>
+
+    <!-- Personalize Wish -->
+    <div class="customize-box">
+      <input type="text" id="senderName" class="name-input" placeholder="Enter your name..." />
+      <button class="festive-btn festive-btn-gold" style="padding: 10px 20px;" onclick="personalizeGreeting()">
+        Customize Wish ✨
+      </button>
+    </div>
+
+    <div class="blessing-footer" id="signature">
+      ✨ Warmest Wishes from DevOps & Cloud Insiders ✨
+    </div>
+  </div>
+
+  <!-- Extra Diyas at Bottom -->
+  <div class="bottom-diyas">
+    <div class="mini-diya" title="Click to light" onclick="burstAtElement(event)">🪔</div>
+    <div class="mini-diya" title="Click to light" onclick="burstAtElement(event)">🪔</div>
+    <div class="mini-diya" title="Click to light" onclick="burstAtElement(event)">🪔</div>
+    <div class="mini-diya" title="Click to light" onclick="burstAtElement(event)">🪔</div>
+    <div class="mini-diya" title="Click to light" onclick="burstAtElement(event)">🪔</div>
+  </div>
+
+  <script>
+    /* Fireworks & Sparkles Engine */
+    const canvas = document.getElementById('fireworks');
+    const ctx = canvas.getContext('2d');
+    let width = canvas.width = window.innerWidth;
+    let height = canvas.height = window.innerHeight;
+
+    window.addEventListener('resize', () => {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    });
+
+    const particles = [];
+    const colors = ['#ffd700', '#ff6b35', '#ff3366', '#ff00aa', '#00e5ff', '#76ff03', '#ffffff', '#ffea00'];
+
+    class Particle {
+      constructor(x, y, color) {
+        this.x = x;
+        this.y = y;
+        this.color = color;
+        this.radius = Math.random() * 3 + 1.5;
+        const angle = Math.random() * Math.PI * 2;
+        const speed = Math.random() * 6 + 2;
+        this.vx = Math.cos(angle) * speed;
+        this.vy = Math.sin(angle) * speed;
+        this.alpha = 1;
+        this.decay = Math.random() * 0.015 + 0.012;
+      }
+
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+        this.vy += 0.05; // gravity
+        this.alpha -= this.decay;
+      }
+
+      draw() {
+        ctx.save();
+        ctx.globalAlpha = Math.max(0, this.alpha);
+        ctx.fillStyle = this.color;
+        ctx.shadowBlur = 10;
+        ctx.shadowColor = this.color;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      }
+    }
+
+    function createFirework(x, y) {
+      const color = colors[Math.floor(Math.random() * colors.length)];
+      for (let i = 0; i < 45; i++) {
+        particles.push(new Particle(x, y, color));
+      }
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, width, height);
+
+      for (let i = particles.length - 1; i >= 0; i--) {
+        particles[i].update();
+        particles[i].draw();
+        if (particles[i].alpha <= 0) {
+          particles.splice(i, 1);
+        }
+      }
+
+      // Random spontaneous background bursts
+      if (Math.random() < 0.05) {
+        createFirework(
+          Math.random() * width,
+          Math.random() * (height * 0.6)
+        );
+      }
+
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+
+    // Click anywhere to burst crackers
+    window.addEventListener('click', (e) => {
+      if (!e.target.closest('button') && !e.target.closest('input')) {
+        createFirework(e.clientX, e.clientY);
+      }
+    });
+
+    function launchCelebration() {
+      for (let i = 0; i < 5; i++) {
+        setTimeout(() => {
+          createFirework(
+            Math.random() * (width * 0.8) + (width * 0.1),
+            Math.random() * (height * 0.5) + (height * 0.1)
+          );
+        }, i * 180);
+      }
+    }
+
+    function burstAtElement(e) {
+      const rect = e.target.getBoundingClientRect();
+      createFirework(rect.left + rect.width / 2, rect.top);
+    }
+
+    // Diwali Quotes & Wishes Carousel
+    const wishes = [
+      "May the divine glow of thousands of diyas illuminate your life with endless joy, prosperity, health, and success. Happy Diwali!",
+      "May Goddess Lakshmi and Lord Ganesha bless you with boundless wealth, wisdom, happiness, and peace this Deepawali!",
+      "Let each sparkling diya light the path toward your grandest dreams and remove all darkness from your world. Shubh Deepawali!",
+      "Wishing that the festival of lights fills your home with laughter, sweetness of mithai, love of family, and warm moments!",
+      "May this auspicious festival bring new opportunities, soaring success, and lifelong contentment to you and your loved ones."
+    ];
+
+    let wishIndex = 0;
+    function nextWish() {
+      wishIndex = (wishIndex + 1) % wishes.length;
+      const quoteEl = document.getElementById('diwali-quote');
+      quoteEl.style.opacity = '0';
+      quoteEl.style.transform = 'translateY(10px)';
+      quoteEl.style.transition = 'all 0.3s ease';
+
+      setTimeout(() => {
+        quoteEl.innerHTML = wishes[wishIndex];
+        quoteEl.style.opacity = '1';
+        quoteEl.style.transform = 'translateY(0)';
+      }, 300);
+
+      launchCelebration();
+    }
+
+    function personalizeGreeting() {
+      const nameInput = document.getElementById('senderName');
+      const sigEl = document.getElementById('signature');
+      const name = nameInput.value.trim();
+
+      if (name) {
+        sigEl.innerHTML = `✨ Warmest Diwali Wishes Specially Sent by <strong>${name}</strong> ✨`;
+        sigEl.style.color = '#ffd700';
+        sigEl.style.fontSize = '1.05rem';
+        launchCelebration();
+      } else {
+        alert("Please enter a name to personalize your wish!");
+      }
+    }
+
+    // Trigger initial welcoming fireworks burst
+    setTimeout(launchCelebration, 500);
+  </script>
+</body>
+</html>
